@@ -13,9 +13,10 @@ class BaseDataset():
         rst = defaultdict(dict)
         stocks = fdr.StockListing(market)
         columns = stocks.columns
-        stock_key = list(set(['Symbol', 'Code']).intersection(set(columns)))[0]
-        if stock_key is None:
+        stock_key = list(set(['Symbol', 'Code']).intersection(set(columns)))
+        if len(stock_key)==0:
             raise ValueError('listing info is empty')
+        stock_key = stock_key[0]
         name_key = list(set(['Name', 'name']).intersection(columns))
         name_key = name_key[0] if len(name_key) !=0 else None
         ind_key = list(set(['Industry', 'Sector']).intersection(columns))
