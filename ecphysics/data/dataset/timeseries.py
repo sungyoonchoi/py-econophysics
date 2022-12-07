@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import FinanceDataReader as fdr
-from ecphysics.data.dataset.base import BaseDataset
+from ecphysics.data.dataset.base_data import BaseDataset
 
 
 class TimeSeriesDataset(BaseDataset):
