@@ -1,5 +1,6 @@
 import FinanceDataReader as fdr
 from collections import defaultdict
+import pandas as pd
 
 class BaseDataset():
 
@@ -7,6 +8,7 @@ class BaseDataset():
     def get_stock_listing_info(cls,
                                market:str='KOSPI'
                                )-> dict:
+
 
         rst = defaultdict(dict)
         stocks = fdr.StockListing(market)
@@ -27,4 +29,23 @@ class BaseDataset():
             stock_info['industry'] = stocks.iloc[i][ind_key] if ind_key is not None else None
             rst[stock] = stock_info
 
-        return rst 
+        return rst
+
+    @classmethod
+    def get_stock_price_data(cls,
+                  code:str,
+                  start_date:str = None,
+                  end_date:str = None,
+                  exchange:str = None,
+                  price_type:list = ['Close'] 
+                  )->pd.DataFrame:
+        
+        try:
+            stock_prices = fdr.DataReader(code, start_date, end_date, exchange=exchange)
+        except:
+            raise ValueError('check code and exchange')
+
+        return stock_prices[price_type]
+    
+
+        
