@@ -1,3 +1,4 @@
+from typing import List, Optional
 import FinanceDataReader as fdr
 from collections import defaultdict
 import pandas as pd
@@ -6,7 +7,7 @@ class BaseDataset():
 
     @classmethod
     def get_stock_listing_info(cls,
-                               market:str='KOSPI'
+                               market:Optional[str]='KOSPI'
                                )-> dict:
 
 
@@ -34,10 +35,10 @@ class BaseDataset():
     @classmethod
     def get_stock_price_data(cls,
                   code:str,
-                  start_date:str = None,
-                  end_date:str = None,
-                  exchange:str = None,
-                  price_type:list = ['Close'] 
+                  start_date:Optional[str] = None,
+                  end_date:Optional[str] = None,
+                  exchange:Optional[str] = None,
+                  price_type:Optional[List[str]] = ['Close'] 
                   )->pd.DataFrame:
         
         try:

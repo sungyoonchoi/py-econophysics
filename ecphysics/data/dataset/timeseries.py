@@ -1,3 +1,4 @@
+from typing import List, Optional
 import numpy as np
 import pandas as pd
 import FinanceDataReader as fdr
@@ -8,12 +9,12 @@ class TimeSeriesDataset(BaseDataset):
 
     @classmethod
     def get_price_return_series(cls,
-                                codes:list,
+                                codes:List[str],
                                 start_date:str,
                                 end_date:str,
-                                price_type:str = 'Close',
-                                exchange:str = None,
-                                log_return:bool = False
+                                price_type:Optional[str] = 'Close',
+                                exchange:Optional[str] = None,
+                                log_return:Optional[bool] = False
                                 ):
         
         prices = pd.DataFrame()
@@ -33,6 +34,4 @@ class TimeSeriesDataset(BaseDataset):
             price_rtns = prices.pct_change(1)
         price_rtns = price_rtns.dropna(axis = 0)
         return price_rtns
-
-
 
